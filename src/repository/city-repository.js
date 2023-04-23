@@ -11,13 +11,36 @@ class CityRepository {
         }
     }
 
-    async deleteCity({ cityId }) {
+    async deleteCity(cityId) {
         try {
             await City.destroy({
                 where: {
                     id: cityId
                 }
             });
+
+
+        } catch (error) {
+            throw { error };
+        }
+    }
+
+    async updateCity(cityId, data) {
+        try {
+            const city = City.update(data, {
+                where: {
+                    id: cityId
+                }
+            })
+        } catch (error) {
+            throw { error };
+        }
+    }
+
+    async getCity(cityId) {
+        try {
+            const city = await City.findByPk(cityId);
+            return city;
 
 
         } catch (error) {
